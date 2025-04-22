@@ -1,0 +1,34 @@
+{
+    "name": "Low Latency CPP Patterns Devcontainer",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/low_latency_cpp_patterns,type=bind,consistency=cached",
+    "workspaceFolder": "/workspaces/low_latency_cpp_patterns",
+    "mounts": [
+        "source=${env:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached",
+        "type=bind,source=/run/host-services/ssh-auth.sock,target=/ssh-agent",
+        "source=${localEnv:HOME}/.config/gh,target=/home/vscode/.config/gh,type=bind,readonly"
+    ],
+    "containerEnv": {
+        "SSH_AUTH_SOCK": "/ssh-agent",
+        "GITHUB_TOKEN": "${localEnv:GITHUB_TOKEN}"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools",
+                "ms-vscode.cpptools-extension-pack",
+                "BazelBuild.vscode-bazel",
+                "ms-azuretools.vscode-docker",
+                "zxh404.vscode-proto3"
+                ]
+        },
+        "settings": {
+            "terminal.integrated.defaultProfile.linux": "bash"
+        }
+    },
+    "forwardPorts": [],
+    "remoteUser": "vscode"
+}

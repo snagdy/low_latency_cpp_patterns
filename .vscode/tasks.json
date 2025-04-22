@@ -1,0 +1,79 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Bazel Target",
+            "type": "shell",
+            "command": "bazel",
+            "args": [
+                "build",
+                "//src:single_consumer_single_producer",
+                "--jobs=8",
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Debug Build Bazel Target",
+            "type": "shell",
+            "command": "bazel",
+            "args": [
+                "build",
+                "-c",
+                "dbg",
+                "//src:single_consumer_single_producer",
+                "--jobs=8",
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Run Single Consumer Single Producer",
+            "type": "shell",
+            "command": "bazel",
+            "args": [
+                "run",
+                "//src:single_consumer_single_producer",
+                "--",
+                "--verbose"
+            ]
+        },
+        {
+            "label": "Clean Bazel Workspace",
+            "type": "shell",
+            "command": "bazel",
+            "args": [
+                "clean"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Bazel Test",          // Task name shown in VSCode
+            "type": "shell",                // Task type
+            "command": "bazel",             // Bazel executable
+            "args": [                       // Arguments for the Bazel command
+                "test",
+                "//tests:test"              // Replace with your test target
+            ],
+            "group": {
+                "kind": "test",             // Group the task under 'test' tasks in VSCode
+                "isDefault": true           // Makes this the default test task
+            },
+            "presentation": {
+                "reveal": "always",         // Always show the terminal
+                "panel": "dedicated"        // Use a dedicated terminal panel
+            },
+            "problemMatcher": []            // Bazel doesn't provide standard error matching
+        }
+    ]
+}
